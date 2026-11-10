@@ -8,6 +8,6 @@ Comment[pt]=Junte os ovos e crie calopsitas raras
 Exec=psito_nest
 Icon=org.psito.nest
 Terminal=false
-Categories=Game;CardGame;
+Categories=Game;LogicGame;
 Keywords=puzzle;sliding;merge;cockatiel;egg;quebra-cabeça;ovo;calopsita;
 StartupWMClass=org.psito.nest
