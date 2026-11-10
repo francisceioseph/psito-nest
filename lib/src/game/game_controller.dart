@@ -1,18 +1,30 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:psito_games_ui/psito_games_ui.dart';
 
 import 'game_state.dart';
 
 /// A game in progress, and what the player has reached so far.
 class GameController extends ChangeNotifier {
-  GameController({int? number}) : number = number ?? _randomNumber() {
+  GameController({int? number, SoundBoard? sounds})
+    : number = number ?? _randomNumber(),
+      sounds = sounds ?? GameSounds.shared {
     _random = Random(this.number);
     state = GameState.start(_random);
     unlocked = state.highest;
   }
 
   static int _randomNumber() => Random().nextInt(999999) + 1;
+
+  /// Where the sounds of the nest go.
+  final SoundBoard sounds;
+
+  /// The last step that still cracks a shell: the newborn.
+  static const lastHatch = 3;
+
+  /// As long as the birds take to slide, so that they join when they meet.
+  static const _slide = Duration(milliseconds: 120);
 
   int number;
   late Random _random;
@@ -55,8 +67,31 @@ class GameController extends ChangeNotifier {
     _previous = state.withoutGhosts;
     state = moved.spawn(_random);
     best = max(best, state.score);
+    _sound(moved.ghosts);
     unlocked = max(unlocked, state.highest);
     notifyListeners();
+  }
+
+  /// The sounds of a slide that joined [joined]: a shell cracking, two birds
+  /// joining, a bird never seen before, and the end of the game.
+  void _sound(List<Tile> joined) {
+    if (joined.isNotEmpty) {
+      final made = joined.map((tile) => tile.level + 1).reduce(max);
+      // A bird never raised before calls out.
+      if (made > lastHatch && made > unlocked) {
+        sounds.play(GameSound.chirp, delay: _slide);
+      } else {
+        sounds.play(
+          made <= lastHatch ? GameSound.hatch : GameSound.join,
+          delay: _slide,
+        );
+      }
+    }
+    if (state.isWon) {
+      sounds.play(GameSound.victory, delay: _slide * 3);
+    } else if (state.isStuck) {
+      sounds.play(GameSound.refuse, delay: _slide * 2);
+    }
   }
 
   void undo() {

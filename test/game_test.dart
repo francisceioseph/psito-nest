@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:psito_games_ui/psito_games_ui.dart';
 import 'package:psito_nest/src/game/game_controller.dart';
 import 'package:psito_nest/src/game/game_state.dart';
 import 'package:psito_nest/src/game/scores.dart';
@@ -120,6 +121,21 @@ void main() {
       expect(game.state.tiles.length, 2);
       expect(game.best, GameState.value(3));
       expect(game.unlocked, 3);
+    });
+
+    test('eggs crack, birds join and a new one calls out', () {
+      final sounds = RecordedSounds();
+      final game = GameController(number: 3, sounds: sounds)
+        ..restoreProgress(best: 0, unlocked: 5);
+      game.state = line([1, 1, 0, 0]);
+      game.slide(Direction.left);
+      game.state = line([4, 4, 0, 0]);
+      game.slide(Direction.left);
+      game.state = line([5, 5, 0, 0]);
+      game.slide(Direction.left);
+      game.state = line([1, 2, 0, 0]);
+      game.slide(Direction.right);
+      expect(sounds.played, [GameSound.hatch, GameSound.join, GameSound.chirp]);
     });
 
     test('a slide that moves nothing lays no egg', () {
