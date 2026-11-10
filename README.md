@@ -66,6 +66,20 @@ tool/build-deb.sh
 sudo apt install ./build/deb/psito-nest_*_amd64.deb
 ```
 
+### On Android
+
+Phones and tablets with Android 7 or newer. It isn't on the stores yet: with
+the Android SDK and Flutter, build it and install it on a device connected by USB:
+
+```bash
+flutter build apk --release
+adb install build/app/outputs/flutter-apk/app-release.apk
+```
+
+For the stores, `android/key.properties` (kept out of git) names the upload key:
+`storeFile`, `storePassword`, `keyAlias` and `keyPassword`. Without it the build
+is signed with the debug key, good only for trying.
+
 ## Develop
 
 ```bash
