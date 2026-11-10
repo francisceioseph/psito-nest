@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Psito Nest
+GenericName=Sliding puzzle
+GenericName[pt]=Quebra-cabeça de deslizar
+Comment=Join the eggs and raise rare cockatiels
+Comment[pt]=Junte os ovos e crie calopsitas raras
+Exec=psito_nest
+Icon=org.psito.nest
+Terminal=false
+Categories=Game;CardGame;
+Keywords=puzzle;sliding;merge;cockatiel;egg;quebra-cabeça;ovo;calopsita;
+StartupWMClass=org.psito.nest
