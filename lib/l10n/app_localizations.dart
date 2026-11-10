@@ -104,18 +104,6 @@ abstract class AppLocalizations {
   /// **'Psito Nest'**
   String get appTitle;
 
-  /// No description provided for @newGame.
-  ///
-  /// In en, this message translates to:
-  /// **'New game'**
-  String get newGame;
-
-  /// No description provided for @undo.
-  ///
-  /// In en, this message translates to:
-  /// **'Undo'**
-  String get undo;
-
   /// No description provided for @youWon.
   ///
   /// In en, this message translates to:
@@ -128,53 +116,11 @@ abstract class AppLocalizations {
   /// **'The nest is full!'**
   String get nestFull;
 
-  /// No description provided for @playAgain.
-  ///
-  /// In en, this message translates to:
-  /// **'Play again'**
-  String get playAgain;
-
   /// No description provided for @winSummary.
   ///
   /// In en, this message translates to:
   /// **'{points}, up to: {bird}'**
   String winSummary(String points, String bird);
-
-  /// No description provided for @yourName.
-  ///
-  /// In en, this message translates to:
-  /// **'Your name'**
-  String get yourName;
-
-  /// No description provided for @save.
-  ///
-  /// In en, this message translates to:
-  /// **'Save'**
-  String get save;
-
-  /// No description provided for @skip.
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get skip;
-
-  /// No description provided for @bestGames.
-  ///
-  /// In en, this message translates to:
-  /// **'Best games'**
-  String get bestGames;
-
-  /// No description provided for @noScores.
-  ///
-  /// In en, this message translates to:
-  /// **'No games finished yet.'**
-  String get noScores;
-
-  /// No description provided for @close.
-  ///
-  /// In en, this message translates to:
-  /// **'Close'**
-  String get close;
 
   /// No description provided for @statScore.
   ///
@@ -187,24 +133,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Best'**
   String get statBest;
-
-  /// No description provided for @moreOptions.
-  ///
-  /// In en, this message translates to:
-  /// **'More options'**
-  String get moreOptions;
-
-  /// No description provided for @howToPlay.
-  ///
-  /// In en, this message translates to:
-  /// **'How to play'**
-  String get howToPlay;
-
-  /// No description provided for @about.
-  ///
-  /// In en, this message translates to:
-  /// **'About'**
-  String get about;
 
   /// No description provided for @howToPlayBody.
   ///

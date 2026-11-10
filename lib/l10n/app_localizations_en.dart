@@ -13,19 +13,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Psito Nest';
 
   @override
-  String get newGame => 'New game';
-
-  @override
-  String get undo => 'Undo';
-
-  @override
   String get youWon => 'The queen has hatched!';
 
   @override
   String get nestFull => 'The nest is full!';
-
-  @override
-  String get playAgain => 'Play again';
 
   @override
   String winSummary(String points, String bird) {
@@ -33,37 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get yourName => 'Your name';
-
-  @override
-  String get save => 'Save';
-
-  @override
-  String get skip => 'Skip';
-
-  @override
-  String get bestGames => 'Best games';
-
-  @override
-  String get noScores => 'No games finished yet.';
-
-  @override
-  String get close => 'Close';
-
-  @override
   String get statScore => 'Score';
 
   @override
   String get statBest => 'Best';
-
-  @override
-  String get moreOptions => 'More options';
-
-  @override
-  String get howToPlay => 'How to play';
-
-  @override
-  String get about => 'About';
 
   @override
   String get howToPlayBody =>

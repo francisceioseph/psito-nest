@@ -1,7 +1,8 @@
 # Licença da arte
 
-As aves em `mascot/` e `birds/` foram geradas com o Gemini, do Google, a partir de
-descrições escritas para este projeto, e depois ajustadas pelo `tool/prepare_art.py`.
+As aves em `birds/` foram geradas com o Gemini, do Google, a partir de
+descrições escritas para este projeto, e depois ajustadas pelo `tool/prepare_art.py`. A calopsita que espia vem do pacote
+`psito_games_ui`, também sob CC0.
 
 Na medida em que a lei permite, elas são dedicadas ao domínio público pela
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.pt-br). O código
