@@ -16,7 +16,7 @@ Flutter. No ads, no telemetry and no account: just a little game and some happin
 - A local table of your best games, kept only on your computer
 - A curious cockatiel that peeks from every edge of the nest when you stop to think
 - Keyboard shortcuts: `Ctrl+Z` undoes and `Ctrl+N` starts a new game
-- English and Portuguese
+- English, Portuguese, Spanish, French, German, Russian and Chinese
 
 ## Install
 
