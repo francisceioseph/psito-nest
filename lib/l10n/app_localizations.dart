@@ -150,6 +150,12 @@ abstract class AppLocalizations {
   /// **'Slide everything with the arrow keys, or by dragging across the nest. Two equal neighbours join into the next step of the chain: eggs hatch, chicks grow and rarer and rarer cockatiels appear.\n\nA new egg is laid after each slide. The game ends when the golden queen hatches, or when the nest fills up with nothing left to join.\n\nEvery join gives points, more for rarer birds. The album under the nest keeps every bird you have ever raised.\n\nCtrl+Z undoes the last slide and Ctrl+N starts a new game.'**
   String get howToPlayBody;
 
+  /// How to play on a phone or a tablet, where there is no keyboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe across the nest to slide everything. Two equal neighbours join into the next step of the chain: eggs hatch, chicks grow and rarer and rarer cockatiels appear.\n\nA new egg is laid after each slide. The game ends when the golden queen hatches, or when the nest fills up with nothing left to join.\n\nEvery join gives points, more for rarer birds. The album under the nest keeps every bird you have ever raised.\n\nThe arrow on the bar undoes the last slide.'**
+  String get howToPlayTouch;
+
   /// No description provided for @aboutBody.
   ///
   /// In en, this message translates to:

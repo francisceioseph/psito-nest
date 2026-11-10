@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The felt of the nest, behind the icon and while the game starts. -->
+    <color name="felt">#FF8A5A3A</color>
+</resources>

@@ -16,8 +16,18 @@ GameState line(List<int> row) => nest([...row, ...List.filled(12, 0)]);
 void main() {
   group('slide', () {
     test('goes to the wall, leaving no holes', () {
-      expect(line([0, 1, 0, 2]).slide(Direction.left)!.grid.take(4), [1, 2, 0, 0]);
-      expect(line([1, 0, 2, 0]).slide(Direction.right)!.grid.take(4), [0, 0, 1, 2]);
+      expect(line([0, 1, 0, 2]).slide(Direction.left)!.grid.take(4), [
+        1,
+        2,
+        0,
+        0,
+      ]);
+      expect(line([1, 0, 2, 0]).slide(Direction.right)!.grid.take(4), [
+        0,
+        0,
+        1,
+        2,
+      ]);
     });
 
     test('works up and down', () {
@@ -34,17 +44,42 @@ void main() {
     });
 
     test('each tile joins only once per slide', () {
-      expect(line([1, 1, 2, 0]).slide(Direction.left)!.grid.take(4), [2, 2, 0, 0]);
-      expect(line([1, 1, 1, 1]).slide(Direction.left)!.grid.take(4), [2, 2, 0, 0]);
+      expect(line([1, 1, 2, 0]).slide(Direction.left)!.grid.take(4), [
+        2,
+        2,
+        0,
+        0,
+      ]);
+      expect(line([1, 1, 1, 1]).slide(Direction.left)!.grid.take(4), [
+        2,
+        2,
+        0,
+        0,
+      ]);
     });
 
     test('the ones nearest the wall join first', () {
-      expect(line([1, 1, 1, 0]).slide(Direction.left)!.grid.take(4), [2, 1, 0, 0]);
-      expect(line([1, 1, 1, 0]).slide(Direction.right)!.grid.take(4), [0, 0, 1, 2]);
+      expect(line([1, 1, 1, 0]).slide(Direction.left)!.grid.take(4), [
+        2,
+        1,
+        0,
+        0,
+      ]);
+      expect(line([1, 1, 1, 0]).slide(Direction.right)!.grid.take(4), [
+        0,
+        0,
+        1,
+        2,
+      ]);
     });
 
     test('tiles apart with a hole between still join', () {
-      expect(line([1, 0, 0, 1]).slide(Direction.left)!.grid.take(4), [2, 0, 0, 0]);
+      expect(line([1, 0, 0, 1]).slide(Direction.left)!.grid.take(4), [
+        2,
+        0,
+        0,
+        0,
+      ]);
     });
 
     test('nothing moving means no slide', () {
@@ -59,10 +94,7 @@ void main() {
     });
 
     test('queens do not join', () {
-      expect(
-        line([maxLevel, maxLevel, 0, 0]).slide(Direction.left),
-        isNull,
-      );
+      expect(line([maxLevel, maxLevel, 0, 0]).slide(Direction.left), isNull);
     });
   });
 
@@ -104,11 +136,15 @@ void main() {
     });
 
     test('a full nest with a pair still goes on', () {
-      expect(nest([1, 1, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 1]).isStuck, isFalse);
+      expect(
+        nest([1, 1, 1, 2, 2, 1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 1]).isStuck,
+        isFalse,
+      );
     });
 
     test('the queen wins', () {
-      final state = line([maxLevel - 1, maxLevel - 1, 0, 0]).slide(Direction.left)!;
+      final state = line([maxLevel - 1, maxLevel - 1, 0, 0])
+          .slide(Direction.left)!;
       expect(state.isWon, isTrue);
     });
   });
@@ -189,6 +225,27 @@ void main() {
       SharedPreferences.setMockInitialValues({'scores': 'not json'});
       expect(await store.load(), isEmpty);
     });
+
+    test(
+      'the game left halfway is kept and a damaged one is ignored',
+      () async {
+        SharedPreferences.setMockInitialValues({});
+        const store = ScoreStore();
+        expect(await store.loadGame(), isNull);
+        await store.saveGame(
+          SavedGame(number: 7, score: 12, grid: List.filled(cellCount, 1)),
+        );
+        final kept = await store.loadGame();
+        expect(
+          (kept!.number, kept.score, kept.grid.length),
+          (7, 12, cellCount),
+        );
+        await store.saveGame(null);
+        expect(await store.loadGame(), isNull);
+        SharedPreferences.setMockInitialValues({'game': '{broken'});
+        expect(await store.loadGame(), isNull);
+      },
+    );
 
     test('the progress is kept', () async {
       SharedPreferences.setMockInitialValues({});

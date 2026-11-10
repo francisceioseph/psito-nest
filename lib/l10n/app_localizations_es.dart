@@ -34,6 +34,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'Desliza todo con las flechas del teclado o arrastrando sobre el nido. Dos vecinos iguales se unen en el siguiente paso de la cadena: los huevos eclosionan, los polluelos crecen y aparecen cacatúas ninfa cada vez más raras.\n\nDespués de cada deslizamiento se pone un huevo nuevo. La partida termina cuando nace la reina dorada, o cuando el nido se llena y ya no queda nada que unir.\n\nCada unión da puntos, más cuanto más rara es el ave. El álbum bajo el nido guarda todas las aves que has criado.\n\nCtrl+Z deshace el último deslizamiento y Ctrl+N empieza una partida nueva.';
 
   @override
+  String get howToPlayTouch =>
+      'Desliza el dedo sobre el nido para moverlo todo. Dos vecinos iguales se unen en el siguiente paso de la cadena: los huevos eclosionan, los polluelos crecen y aparecen cacatúas ninfa cada vez más raras.\n\nDespués de cada deslizamiento se pone un huevo nuevo. La partida termina cuando nace la reina dorada, o cuando el nido se llena y ya no queda nada que unir.\n\nCada unión da puntos, más cuanto más rara es el ave. El álbum bajo el nido guarda todas las aves que has criado.\n\nLa flecha de la barra deshace el último deslizamiento.';
+
+  @override
   String get aboutBody =>
       'Junta los huevos y cría cacatúas ninfa raras. Sin anuncios, sin telemetría y sin cuenta.';
 

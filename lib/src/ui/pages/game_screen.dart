@@ -29,22 +29,47 @@ class _GameScreenState extends State<GameScreen> {
   int _savedBest = 0;
   int _savedUnlocked = 0;
 
+  /// Nothing is kept before what was kept last time is back.
+  bool _loaded = false;
+
   @override
   void initState() {
     super.initState();
     _game.addListener(_gameChanged);
-    _store.loadProgress().then((progress) {
-      if (!mounted) return;
-      _savedBest = progress.$1;
-      _savedUnlocked = progress.$2;
-      _game.restoreProgress(best: progress.$1, unlocked: progress.$2);
-    });
+    _load();
+  }
+
+  Future<void> _load() async {
+    final progress = await _store.loadProgress();
+    final saved = widget.number == null ? await _store.loadGame() : null;
+    if (!mounted) return;
+    _savedBest = progress.$1;
+    _savedUnlocked = progress.$2;
+    _loaded = true;
+    if (saved != null && _game.untouched) {
+      _game.resume(
+        number: saved.number,
+        state: GameState.fromGrid(saved.grid, score: saved.score),
+      );
+    }
+    _game.restoreProgress(best: progress.$1, unlocked: progress.$2);
   }
 
   void _gameChanged() {
     final over = _game.state.isOver;
     if (over && !_wasOver) _peek.peekNow();
     _wasOver = over;
+    if (!_loaded) return;
+    // Every change is kept: on a phone the program may be closed at any time.
+    _store.saveGame(
+      over
+          ? null
+          : SavedGame(
+              number: _game.number,
+              score: _game.state.score,
+              grid: _game.state.grid,
+            ),
+    );
     if (_game.best > _savedBest || _game.unlocked > _savedUnlocked) {
       _savedBest = _game.best;
       _savedUnlocked = _game.unlocked;
@@ -87,8 +112,7 @@ class _GameScreenState extends State<GameScreen> {
           _slide(Direction.left),
       const SingleActivator(LogicalKeyboardKey.arrowRight): () =>
           _slide(Direction.right),
-      const SingleActivator(LogicalKeyboardKey.keyZ, control: true):
-          _game.undo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, control: true): _game.undo,
       const SingleActivator(LogicalKeyboardKey.keyN, control: true):
           _game.newGame,
     },

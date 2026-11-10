@@ -34,6 +34,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'Deslize tudo com as setas do teclado, ou arrastando no ninho. Dois vizinhos iguais se juntam no próximo passo da corrente: os ovos chocam, os filhotes crescem e aparecem calopsitas cada vez mais raras.\n\nUm ovo novo aparece depois de cada jogada. O jogo termina quando a rainha dourada nasce, ou quando o ninho enche sem nada para juntar.\n\nCada junção dá pontos, e mais para aves mais raras. O álbum embaixo do ninho guarda todas as aves que você já criou.\n\nCtrl+Z desfaz a última jogada e Ctrl+N começa um novo jogo.';
 
   @override
+  String get howToPlayTouch =>
+      'Deslize o dedo no ninho para mover tudo. Dois vizinhos iguais se juntam no próximo passo da corrente: os ovos chocam, os filhotes crescem e aparecem calopsitas cada vez mais raras.\n\nUm ovo novo aparece depois de cada jogada. O jogo termina quando a rainha dourada nasce, ou quando o ninho enche sem nada para juntar.\n\nCada junção dá pontos, e mais para aves mais raras. O álbum embaixo do ninho guarda todas as aves que você já criou.\n\nA seta da barra desfaz a última jogada.';
+
+  @override
   String get aboutBody =>
       'Junte os ovos e crie calopsitas raras. Sem anúncios, sem telemetria e sem conta.';
 

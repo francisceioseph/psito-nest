@@ -34,6 +34,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Faites tout glisser avec les flèches du clavier, ou en tirant sur le nid. Deux voisins identiques s’unissent en l’étape suivante de la chaîne : les œufs éclosent, les poussins grandissent et des calopsittes de plus en plus rares apparaissent.\n\nUn nouvel œuf est pondu après chaque glissement. La partie se termine quand la reine dorée éclot, ou quand le nid est plein sans plus rien à unir.\n\nChaque union rapporte des points, d’autant plus que l’oiseau est rare. L’album sous le nid garde tous les oiseaux que vous avez élevés.\n\nCtrl+Z annule le dernier glissement et Ctrl+N lance une nouvelle partie.';
 
   @override
+  String get howToPlayTouch =>
+      'Glissez le doigt sur le nid pour tout faire glisser. Deux voisins identiques s’unissent en l’étape suivante de la chaîne : les œufs éclosent, les poussins grandissent et des calopsittes de plus en plus rares apparaissent.\n\nUn nouvel œuf est pondu après chaque glissement. La partie se termine quand la reine dorée éclot, ou quand le nid est plein sans plus rien à unir.\n\nChaque union rapporte des points, d’autant plus que l’oiseau est rare. L’album sous le nid garde tous les oiseaux que vous avez élevés.\n\nLa flèche de la barre annule le dernier glissement.';
+
+  @override
   String get aboutBody =>
       'Assemblez les œufs et élevez des calopsittes rares. Sans publicité, sans télémétrie et sans compte.';
 

@@ -52,6 +52,23 @@ class GameController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Has not been touched since it started, so a game left halfway can take
+  /// its place.
+  bool get untouched => !canUndo && state.score == 0;
+
+  /// Goes on with a game left halfway.
+  void resume({required int number, required GameState state}) {
+    this.number = number;
+    // Not the eggs the game would have laid, but no less random.
+    _random = Random(number ^ state.score);
+    this.state = state;
+    _previous = null;
+    gameId++;
+    unlocked = max(unlocked, state.highest);
+    best = max(best, state.score);
+    notifyListeners();
+  }
+
   /// Puts back what the saved games have reached.
   void restoreProgress({required int best, required int unlocked}) {
     this.best = max(this.best, best);

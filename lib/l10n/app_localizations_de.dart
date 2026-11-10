@@ -34,6 +34,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Schiebe alles mit den Pfeiltasten oder durch Ziehen über das Nest. Zwei gleiche Nachbarn vereinen sich zur nächsten Stufe der Kette: Eier schlüpfen, Küken wachsen, und immer seltenere Nymphensittiche erscheinen.\n\nNach jedem Schieben wird ein neues Ei gelegt. Das Spiel endet, wenn die goldene Königin schlüpft oder wenn das Nest voll ist und sich nichts mehr vereinen lässt.\n\nJede Vereinigung bringt Punkte, mehr für seltenere Vögel. Das Album unter dem Nest bewahrt jeden Vogel, den du je aufgezogen hast.\n\nStrg+Z nimmt das letzte Schieben zurück, und Strg+N startet ein neues Spiel.';
 
   @override
+  String get howToPlayTouch =>
+      'Wische über das Nest, um alles zu schieben. Zwei gleiche Nachbarn vereinen sich zur nächsten Stufe der Kette: Eier schlüpfen, Küken wachsen, und immer seltenere Nymphensittiche erscheinen.\n\nNach jedem Schieben wird ein neues Ei gelegt. Das Spiel endet, wenn die goldene Königin schlüpft oder wenn das Nest voll ist und sich nichts mehr vereinen lässt.\n\nJede Vereinigung bringt Punkte, mehr für seltenere Vögel. Das Album unter dem Nest bewahrt jeden Vogel, den du je aufgezogen hast.\n\nDer Pfeil in der Leiste nimmt das letzte Schieben zurück.';
+
+  @override
   String get aboutBody =>
       'Füge die Eier zusammen und ziehe seltene Nymphensittiche auf. Ohne Werbung, ohne Telemetrie und ohne Konto.';
 

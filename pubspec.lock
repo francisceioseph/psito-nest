@@ -361,11 +361,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v1.1.0"
-      resolved-ref: "8fee1a3e1bddf9343afdcc909ecb3fd389926a5f"
+      ref: "v1.2.0"
+      resolved-ref: "874968c75ba2af8f95734146351811251fac9a59"
       url: "https://github.com/francisceioseph/psito-games-ui"
     source: git
-    version: "1.1.0"
+    version: "1.2.0"
   pub_semver:
     dependency: transitive
     description:
@@ -503,10 +503,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: fa49e1674cb84acb900141714e6c6e1f9ae099827c24d141430ff6819db4e1bc
+      sha256: "1d774bbdf6b72a0b12122fc1560c9c2d2a67db5a4a4cc2bd8a5c990ab20e3188"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.4"
+    version: "2.4.0"
   vm_service:
     dependency: transitive
     description:

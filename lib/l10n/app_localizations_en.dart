@@ -34,6 +34,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Slide everything with the arrow keys, or by dragging across the nest. Two equal neighbours join into the next step of the chain: eggs hatch, chicks grow and rarer and rarer cockatiels appear.\n\nA new egg is laid after each slide. The game ends when the golden queen hatches, or when the nest fills up with nothing left to join.\n\nEvery join gives points, more for rarer birds. The album under the nest keeps every bird you have ever raised.\n\nCtrl+Z undoes the last slide and Ctrl+N starts a new game.';
 
   @override
+  String get howToPlayTouch =>
+      'Swipe across the nest to slide everything. Two equal neighbours join into the next step of the chain: eggs hatch, chicks grow and rarer and rarer cockatiels appear.\n\nA new egg is laid after each slide. The game ends when the golden queen hatches, or when the nest fills up with nothing left to join.\n\nEvery join gives points, more for rarer birds. The album under the nest keeps every bird you have ever raised.\n\nThe arrow on the bar undoes the last slide.';
+
+  @override
   String get aboutBody =>
       'Join the eggs and raise rare cockatiels. No ads, no telemetry and no account.';
 

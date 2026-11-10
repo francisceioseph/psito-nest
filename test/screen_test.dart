@@ -139,16 +139,67 @@ void main() {
     await finish(tester);
   });
 
-  testWidgets('fits small and large windows without overflowing', (tester) async {
+  testWidgets('fits small and large windows without overflowing', (
+    tester,
+  ) async {
     for (final size in const [
       Size(480, 360),
       Size(1920, 1080),
       Size(800, 1200),
       Size(480, 300),
+      // Phones, standing and lying, and a tablet.
+      Size(360, 740),
+      Size(320, 568),
+      Size(740, 360),
+      Size(1280, 800),
+      Size(800, 1280),
     ]) {
       await pumpGame(tester, size);
-      expect(tester.takeException(), isNull);
+      expect(tester.takeException(), isNull, reason: '$size');
     }
+    await finish(tester);
+  });
+
+  testWidgets('a game left halfway comes back', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await const ScoreStore().saveGame(
+      SavedGame(number: 42, score: 36, grid: [3, 2, ...List.filled(14, 0)]),
+    );
+    await tester.pumpWidget(
+      const MaterialApp(
+        locale: Locale('pt'),
+        localizationsDelegates: [
+          ...AppLocalizations.localizationsDelegates,
+          GamesUiLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: GameScreen(),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 300));
+    final game = tester.widget<Board>(find.byType(Board)).game;
+    expect(game.number, 42);
+    expect(game.state.grid.take(2), [3, 2]);
+    expect(find.text('36'), findsWidgets);
+
+    game.slide(Direction.right);
+    await tester.pump(const Duration(milliseconds: 300));
+    final kept = await const ScoreStore().loadGame();
+    expect(kept!.grid, game.state.grid);
+    await finish(tester);
+  });
+
+  testWidgets('a game that ended is not kept', (tester) async {
+    await pumpGame(tester, const Size(1280, 800));
+    final game = tester.widget<Board>(find.byType(Board)).game;
+    game.state = GameState.fromGrid([
+      maxLevel - 1,
+      maxLevel - 1,
+      ...List.filled(14, 0),
+    ]);
+    game.slide(Direction.left);
+    await tester.pump(const Duration(seconds: 1));
+    expect(await const ScoreStore().loadGame(), isNull);
     await finish(tester);
   });
 }

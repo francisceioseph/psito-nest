@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'game_state.dart';
+
 /// A finished game.
 @immutable
 class Score {
@@ -44,8 +46,37 @@ List<Score> insertScore(List<Score> scores, Score score) {
   return sorted.take(maxScores).toList();
 }
 
-/// The scores, the last name used and the progress of the album. They stay
-/// on this computer.
+/// A game left halfway: on a phone the system may close the program at any
+/// time, and the nest must be there when the player comes back.
+@immutable
+class SavedGame {
+  const SavedGame({
+    required this.number,
+    required this.score,
+    required this.grid,
+  });
+
+  factory SavedGame.fromJson(Map<String, dynamic> json) => SavedGame(
+    number: json['number'] as int,
+    score: json['score'] as int,
+    grid: [for (final level in json['grid'] as List) level as int],
+  );
+
+  final int number;
+  final int score;
+
+  /// The levels, cell by cell, with 0 for an empty place.
+  final List<int> grid;
+
+  Map<String, dynamic> toJson() => {
+    'number': number,
+    'score': score,
+    'grid': grid,
+  };
+}
+
+/// The scores, the last name used, the progress of the album and the game
+/// in progress. They stay on this device.
 class ScoreStore {
   const ScoreStore();
 
@@ -53,6 +84,7 @@ class ScoreStore {
   static const _nameKey = 'player_name';
   static const _bestKey = 'best';
   static const _unlockedKey = 'unlocked';
+  static const _gameKey = 'game';
 
   Future<List<Score>> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -93,5 +125,30 @@ class ScoreStore {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(_bestKey, best);
     await prefs.setInt(_unlockedKey, unlocked);
+  }
+
+  /// The game left halfway, if there is one.
+  Future<SavedGame?> loadGame() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_gameKey);
+    if (raw == null) return null;
+    try {
+      final game = SavedGame.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+      if (game.grid.length != cellCount) return null;
+      return game;
+    } on Object {
+      // A damaged file must not stop the game.
+      return null;
+    }
+  }
+
+  /// Keeps [game], or forgets the one kept when it is null.
+  Future<void> saveGame(SavedGame? game) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (game == null) {
+      await prefs.remove(_gameKey);
+    } else {
+      await prefs.setString(_gameKey, jsonEncode(game));
+    }
   }
 }

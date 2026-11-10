@@ -12,7 +12,7 @@ import 'victory_panel.dart';
 GameInfo nestInfo(AppLocalizations l10n) => GameInfo(
   title: l10n.appTitle,
   version: appVersion,
-  howToPlay: l10n.howToPlayBody,
+  howToPlay: touchFirst ? l10n.howToPlayTouch : l10n.howToPlayBody,
   about: l10n.aboutBody,
   legal: l10n.aboutLegal,
   site: 'https://francisceioseph.github.io/psito-nest/',
@@ -46,7 +46,7 @@ class NestBar extends StatelessWidget {
       ),
       actions: (space) => [
         BarButton(
-          tooltip: '${context.gamesUi.undo}  (Ctrl+Z)',
+          tooltip: withShortcut(context.gamesUi.undo, 'Ctrl+Z'),
           icon: Icons.undo_rounded,
           onPressed: game.canUndo ? game.undo : null,
         ),
